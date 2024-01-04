@@ -1,8 +1,0 @@
-print("---FRONT END---")
-print("HTML")
-print("css")
-print("bootstrap")
-print("java script")
-print("---BACK END---")
-print("my sql")
-print("python django")
