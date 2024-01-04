@@ -1,3 +1,0 @@
-print("Anjitha K Kamal")
-print("ST JOSEPH COLLEGE OF ENGINEERING AND TECHNOLOGY,PALAI")
-print("MCA")
