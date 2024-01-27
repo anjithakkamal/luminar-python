@@ -1,6 +1,5 @@
 #def is_armstrong (num) return true if num is armstrong else return false
-from ast import Num
-from unicodedata import digit
+
 
 
 def is_armstrong(num):

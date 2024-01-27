@@ -7,5 +7,6 @@ for num in list:
         max1=num
     elif num>max2:
         max2=num
-max_sum=max1+max2
-print("max pair sum =",max_sum)
+# max_sum=max1+max2
+print("max pairs are =",max1,max2)
+# print("max pair sum =",max_sum)
