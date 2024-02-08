@@ -1,0 +1,19 @@
+.box{
+    background-color: green;
+    width: 300px;
+    height: 250px;
+    border: 6px solid palevioletred;
+    border-radius: 10%;
+    color: white;
+}
+.text-center{
+    text-align: center;
+    color: orange;
+}
+.box2{
+    text-align: center;
+    height: 90px;
+    width: 190px;
+    border-radius: 10%;
+    border: 6px solid greenyellow;
+}
