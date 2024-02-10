@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+}
+.box{
+    height: 100px;
+    width: 200px;
+    border: 3px solid black;
+    padding-left:50px; 
+    padding-top: 50px;
+}
+.bg-sucess{
+    background-color: green;
+}
+.bg-primary{
+    background-color: blue;
+}
+.bg-warning{
+    background-color: red;
+}
+.box1{
+    margin-right: auto;
+}
+.box2{
+    margin-left: auto;
+    margin-right: auto;
+}
+.box3{
+    margin-left: auto;
+}

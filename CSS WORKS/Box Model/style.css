@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+}
+.box{
+  width: 100px;
+  height: 100px; 
+  background-color: cyan; 
+}
+.top-box{
+    margin-left: 460px;
+    margin-top: 100px;
+}
+.footer-box{
+    margin-top: 150px;
+    margin-left: 460px;
+}
