@@ -1,0 +1,32 @@
+.parent{
+    width: 70%;
+    height: 500px;
+    background-color: cadetblue;
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex; 
+    /* justify-content: flex-end;  right */ 
+    /* justify-content: flex-start;  left*/
+    /* justify-content: center;  center */
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
+    align-items: center;
+    /* align-items: flex-end; */
+    /* align-items: flex-start; */
+}
+.child{
+    width: 20%;
+    height: 400px;
+    border: 2px solid beige;
+}
+.child:nth-child(1){
+    background-color: yellow;
+}
+.child:nth-child(2){
+    background-color: violet;
+}
+.child:nth-child(3){
+    background-color:tomato;
+}

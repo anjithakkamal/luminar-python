@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+}
+body{
+    background-color: black;
+}
+/* .parent{
+    
+    background-color: black;
+} */
+.parent1{
+    width: 40%;
+    height: 100px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content:space-around;
+}
+.child{
+    width: 16%;
+    height: 100px;
+}
+.child:nth-child(1){
+    background-color: grey;
+}
+.child:nth-child(2){
+    background-color: darkolivegreen;
+}
+.child:nth-child(3){
+    background-color: darkgreen;
+}
+.child:nth-child(4){
+    background-color:green;
+}
+.child:nth-child(5){
+    background-color:lightgray;
+}
+.parent2{
+    width: 50%;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+
+    display: flex;
+    justify-content: space-around;
+}
+.child1{
+    width: 12%;
+    height: 100px;
+    
+    /* border: 1px solid wheat; */
+
+}
+.child1:nth-child(1){
+    background-color: orange;
+    
+}
+.child1:nth-child(2){
+    background-color:tomato;
+}
+.child1:nth-child(3){
+    background-color:violet;
+}
+.child1:nth-child(4){
+    background-color:rgba(216, 130, 238, 0.856);
+}
+.child1:nth-child(5){
+    background-color:rgba(148, 0, 211, 0.486);
+}
+.child1:nth-child(6){
+    background-color:darkviolet;
+}
+.child1:nth-child(7){
+    background-color:rgba(169, 169, 169, 0.315);
+}
+
+.parent3{
+    width: 60%;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content:space-around;
+} 
+
+.child2{
+    width: 9%;
+    height: 100px;
+}
+.child2:nth-child(1){
+    background-color: aqua;
+}
+.child2:nth-child(2){
+    background-color:greenyellow;
+}
+.child2:nth-child(3){
+    background-color:orangered;
+}
+.child2:nth-child(4){
+    background-color:darkmagenta;
+}
+.child2:nth-child(5){
+    background-color: brown;
+}
+.child2:nth-child(6){
+    background-color: lightseagreen;
+}
+.child2:nth-child(7){
+    background-color: rgba(0, 255, 255, 0.534);
+}
+.child2:nth-child(8){
+    background-color: rgba(150, 14, 150, 0.664);
+}
+.child2:nth-child(9){
+    background-color: rgb(48, 4, 48);
+}
