@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>SUBTRACTION</h1>
+    <form action="" method="post">
+        {%csrf_token%}
+        <div>
+            <label for="">Enter Number 1 : </label>
+            <input type="text" placeholder="enter number 1" name="box1">
+        </div>
+
+        <div>
+            <label for="">Enter Number 2 : </label>
+            <input type="text" placeholder="enter number 2" name="box2">
+        </div>
+
+        <button type="submit">SUB</button>
+        output={{data}}
+
+    </form>
+</body>
+</html>
