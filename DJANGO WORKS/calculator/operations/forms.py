@@ -1,3 +1,4 @@
+from random import choices
 from django import forms
 
 class RegistrationForm(forms.Form):
@@ -45,3 +46,16 @@ class TemperatureForm(forms.Form):
     temp_in_deg=forms.IntegerField(required=False)
 
     temp_in_fh=forms.IntegerField(required=False)
+
+class ElectricityForm(forms.Form):
+
+    previous_reading=forms.IntegerField()
+
+    current_reading=forms.IntegerField()
+
+    options=(
+        (1,"single phase"),
+        (2,"three phase")
+    )
+
+    phase=forms.ChoiceField(choices=options)

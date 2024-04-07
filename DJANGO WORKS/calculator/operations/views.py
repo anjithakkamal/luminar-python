@@ -1,102 +1,168 @@
+from webbrowser import get
 from django.shortcuts import render
 from django.views.generic import View
-from operations.forms import RegistrationForm,BmrForm,EmiForm, TemperatureForm
+from operations.forms import RegistrationForm,BmrForm,EmiForm,TemperatureForm,ElectricityForm
 
 # Create your views here.
 class AdditionView(View):
 
     def get(self,request,*args, **kwargs):
+
         return render(request,"add.html")
+
     def post(self,request,*args, **kwargs):
+
         num1=request.POST.get("box1")
+
         num2=request.POST.get("box2")
+
         result=int(num1)+int(num2)
+
         print(result)
+
         return render(request,"add.html")
 
 class SubtractionView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"sub.html")
+
     def post(self,request,*args, **kwargs):
+
         num1=request.POST.get("box1")
+
         num2=request.POST.get("box2")
+
         result=int(num1)-int(num2)
         print(result)
+
         return render(request,"sub.html",{"data":result})
 
 class MultiplicationView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"mul.html")
+
     def post(self,request,*args, **kwargs):
+
         num1=request.POST.get("box1")
+
         num2=request.POST.get("box2")
+
         result=int(num1)*int(num2)
+
         print(result)
+
         return render(request,"mul.html",{"data":result})
 
 class FactorialView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"factorial.html")
     
     def post(self,request,*args, **kwargs):
+
         num=int(request.POST.get("box"))
+
         result=1
         for i in range(1,(num+1)):
+
             result=result*i
+
         return render(request,"factorial.html",{"data":result})
 
 class PrimeNumberView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"prime.html")
     
     def post(self,request,*args, **kwargs):
+
         num=int(request.POST.get("box"))
+
         is_prime=True
+
         for i in range(2,num):
+
             if num%i==0:
+
                 is_prime=False
+
                 break
+
         return render(request,"prime.html",{"data":is_prime})
 
 class BmiView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"bmi.html")
     
     def post(self,request,*args, **kwargs):
+
         height=int(request.POST.get("hbox"))
+
         weight=int(request.POST.get("wbox"))
+
         height_in_meter=height/100
+
         bmi=weight/(height_in_meter)**2
+
         bmi=round(bmi,2)
+
         result=""
+
         if bmi<19:
+
             result="underweight"
+
         elif bmi<25:
+
             result="Normal Weight"
+
         elif bmi<30:
+
             result="Over Weight"
+
         elif bmi>30:
+
             result="obese"
             
         return render(request,"bmi.html",{"data":result})
 
 class ReverseView(View):
+
     def get(self,request,*args, **kwargs):
+
         return render(request,"reverse.html")
     
     def post(self,request,*args, **kwargs):
+
         num=int(request.POST.get("box"))
+
         result=""
+
         while(num!=0):
+
             digit=num%10
+
             result=result+str(digit)
+
             num=num//10
+            
         return render(request,"reverse.html",{"data":result})
 
 
 class RegistartionView(View):
+
     def get(self,request,*args,**kwargs):
+
         form=RegistrationForm()
+
         return render(request,"registration.html",{"form":form})
 
 class BmrView(View):
@@ -281,4 +347,61 @@ class ElectricityView(View):
     def get(self,request,*args, **kwargs):
 
         form_instance=ElectricityForm()
+
+        return render(request,"electricity.html",{"form":form_instance})
         
+    def post(self,request,*args, **kwargs):
+
+        form_instance=ElectricityForm(request.POST)
+
+        if form_instance.is_valid():
+
+            print(form_instance.cleaned_data)
+
+            validated_data=form_instance.cleaned_data
+
+            previous_reading=validated_data.get("previous_reading")
+
+            current_reading=validated_data.get("current_reading")
+
+            phase=validated_data.get("phase")
+
+            print(previous_reading,current_reading,phase)
+
+            unit=current_reading-previous_reading
+
+            print(unit)
+
+            amount=0
+
+            phase_values={"1":80,"2":160}
+
+            if unit<100 :
+
+                amount=(unit*6.05)+phase_values.get(phase)
+
+            elif unit<200:
+
+                amount=(unit*6.80)+phase_values.get(phase)
+
+            elif unit<300:
+
+                amount=(unit*7.50)+phase_values.get(phase)
+
+            elif unit<500:
+
+                amount=(unit*8.15)+phase_values.get(phase)
+
+            elif unit>500:
+
+                amount=(unit*9.40)+phase_values.get(phase)
+            
+            print(amount)
+
+            return render(request,"electricity.html",{"form":form_instance,"data":amount})
+        
+        else:
+
+            print("errors")
+
+            return render(request,"electricity.html",{"form":form_instance})

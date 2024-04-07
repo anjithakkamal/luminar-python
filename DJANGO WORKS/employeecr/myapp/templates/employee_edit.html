@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+{%block title-block%}
+<title>employee-edit</title>
+{%endblock%}
+{%block main_block%}
+<div class="container border shadow mt-5 p-4 w-50 mx-auto rounded bg-info">
+    <h2 class="text-center">Edit Employee</h2>
+    <form action="" method="post">
+        {%csrf_token%}
+        <!-- {{form.as_p}} -->
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="" class="fw-bold mb-2">Name</label>
+                {{form.name}}
+            </div>
+            <div class="col-6">
+                <label for="" class="fw-bold mb-2">Salary</label>
+                {{form.salary}}
+            </div>   
+        </div>
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="" class="fw-bold mb-2">Department</label>
+                {{form.department}}
+            </div>
+            <div class="col-6">
+                <label for="" class="fw-bold mb-2">Location</label>
+                {{form.location}}
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="" class="fw-bold mb-2">Email</label>
+                {{form.email}}
+            </div>
+            <div class="col-6">
+                <label for=""class="fw-bold mb-2">Address</label>
+                {{form.address}}
+            </div>
+        </div>
+        <button type="submit" class="form-control btn btn-outline-dark">EDIT</button>
+    </form>
+</div>
+{%endblock%}

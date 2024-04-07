@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from operations.views import AdditionView,SubtractionView,MultiplicationView,FactorialView,PrimeNumberView,BmiView\
-    ,ReverseView,RegistartionView,BmrView,EmiView,TempConversionView,BmrVersionTwoView
+    ,ReverseView,RegistartionView,BmrView,EmiView,TempConversionView,BmrVersionTwoView,ElectricityView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +32,7 @@ urlpatterns = [
     path('bmr/',BmrView.as_view()),
     path('emi/',EmiView.as_view()),
     path('temp/',TempConversionView.as_view()),
-    path('bmr/v2/',BmrVersionTwoView.as_view())
+    path('bmr/v2/',BmrVersionTwoView.as_view()),
+    path('electricity/',ElectricityView.as_view()),
+    
 ]

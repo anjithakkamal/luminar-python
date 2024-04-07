@@ -1,0 +1,107 @@
+class Employee(models.Model):
+
+    name=models.CharField(max_length=200)
+
+    department=models.CharField(max_length=200)
+
+    salary=models.PositiveIntegerField()
+
+    location=models.CharField(max_length=200)
+
+    email=models.EmailField(max_length=200)
+
+    address=models.CharField(max_length=200)
+
+=====orm query for creating a new movie object======
+>>>>Employee.objects.create(name="anji",department="hr",salary="40000",location="kochi",email="anjithakkamal@gmail.com",address="sindhu bhavan")
+
+=====orm query for fetching all movie objects=======
+>>>>qs=Employee.objects.all()
+
+=====orm query for fetching a specific movie detail====
+>>>>qs=Employee.objects.get(id=2)
+    qs.salary
+    qs.location
+    qs.department
+    qs.email
+    qs.address
+
+=====filtering query sets========
+>>>qs=Employee.objects.filter(department="hr")
+
+=====banglore working Employee department=====
+>>>qs=Employee.objects.filter(location="banglore",department="teacher")
+
+======fetch Employee salary>35000=====         
+>>>qs=Employee.objects.filter(salary__gt=35000)
+
+======fetch Employee salary<35000=====         
+>>>qs=Employee.objects.filter(salary__lt=35000)
+
+======fetch Employee salary<35000 and department=developer=====         
+>>>qs=Employee.objects.filter(salary__lt=50000,department="developer")
+
+======filter all Employee whose department=developer (===checking  __iexact means case insensitive )
+>>>qs=Employee.objects.filter(department__iexact="Developer")
+
+===__icontains  an included Employee name
+>>>qs=Employee.objects.filter(name__icontains="An")
+
+===  __in filter hr and developer in Employee
+>>>> qs=Employee.objects.filter(department__in=["hr","developer"])
+
+===update name and location of id=1 in Employee
+>>> Employee.objects.filter(id=1).update(name="Anjitha",location="ernakulam")
+
+=== delete one Employee details
+>>> Employee.objects.filter(id=6).delete()
+
+===highest salary
+>>> qs=Employee.objects.all().order_by("-salary").first()
+>>> qs=Employee.objects.all().order_by("-salary")[0] 
+>>> qs=Employee.objects.all().order_by("-salary")[0:5] first
+
+===list all department
+>>>qs=Employee.objects.values_list('department',flat=True).distinct()
+
+===descending order salary
+>>> qs=Employee.objects.all().order_by("-salary")
+
+===ascending order salary        ####order_by
+>>> qs=Employee.objects.all().order_by("salary")
+
+====aggregate ORM query
+
+    (Max,Min,Sum,Count,Avg) 
+
+>>>   from django.db.models import Max,Min
+
+>>> max_salary=Employee.objects.aggregate(Max('salary'))
+    
+>>> min_salary=Employee.objects.aggregate(Min('salary'))
+
+**************april1
+
+=== fetching all movie with highest salary        
+                                 
+>>> qs=Employee.objects.values("salary").aggregate(highest=Max("salary"))
+
+>>> data=Employee.objects.filter(salary=qs.get("highest"))
+
+=== fetching all Employee with smallest salary
+
+>>> qs=Employee.objects.values("salary").aggregate(smallest=Min("salary"))
+
+>>> data=Employee.objects.filter(salary=qs.get("smallest")) 
+
+===group Employee wrt department      //drama=1,romantic=2//
+>>> qs=Employee.objects.values("department").annotate(summary=Count("department"))
+
+=== group Employee wrt location
+>>> qs=Employee.objects.values("location").annotate(summary=Count("location"))
+
+
+
+
+
+
