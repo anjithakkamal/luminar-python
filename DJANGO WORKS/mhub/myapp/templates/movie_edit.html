@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{%block title_block%}
+<title>movie-edit</title>
+{%endblock%}
+{%block main_block%}
+<div class="container border shadow mt-5 p-4 w-50 mx-auto rounded">
+    <h2 class="text-center fw-bold">Edit Movies</h2>
+    <form action="" method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit" class="form-control btn btn-outline-info">Edit</button>
+    </form>
+</div>
+{%endblock%}
