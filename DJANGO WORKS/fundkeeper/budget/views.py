@@ -120,12 +120,21 @@ class ExpenseSummaryView(View):
 
         print(priority_summary)
 
-        return render(request,"expense_summary.html")
+        data={
+
+            "expense_total":expense_total,
+
+            "category_summary":category_summary,
+
+            "priority_summary":priority_summary
+        }
+
+        return render(request,"expense_summary.html",data)
 
 
      
 
-# ___________________income view_____________________
+# _________________________________________income view_________________________________________________
 
 class IncomeCreatedView(View):
 
@@ -227,6 +236,14 @@ class IncomeSummaryView(View):
 
         print(category_summary)
 
-        return render(request,"expense_summary.html")
+        data={
+
+            "income_total":income_total,
+
+            "category_summary":category_summary,
+
+        }
+
+        return render(request,"income_summary.html",data)
 
 
