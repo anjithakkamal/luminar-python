@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 from django.views.generic import View
 
-from budget.forms import ExpenseForm, IncomeForm
+from budget.forms import ExpenseForm, IncomeForm,RegistrationForm
 
 from budget.models import Expense,Income
 
@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.utils import timezone
 
 from django.db.models import Sum
+
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -136,6 +138,7 @@ class ExpenseSummaryView(View):
 
 # _________________________________________income view_________________________________________________
 
+
 class IncomeCreatedView(View):
 
     def get(self,request,*args, **kwargs):
@@ -245,5 +248,37 @@ class IncomeSummaryView(View):
         }
 
         return render(request,"income_summary.html",data)
+
+
+class SignUpView(View):
+
+    def get(self,request,*args, **kwargs):
+
+        form_instance=RegistrationForm()
+
+        return render(request,"register.html",{"form":form_instance})
+
+    def post(self,request,*args, **kwargs):
+
+        form_instance=RegistrationForm(request.POST)
+
+        if form_instance.is_valid():
+
+            # form_instance.save()
+
+            data=form_instance.cleaned_data
+
+            User.objects.create_user(**data)
+
+            print("user object created")
+
+            return redirect('signup')
+
+        else:
+
+            print("user creation failed")
+
+            return render(request,"register.html",{"form":form_instance})
+
 
 

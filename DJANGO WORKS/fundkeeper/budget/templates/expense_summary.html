@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block main_block %}
+{% load custom_filters%}
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -11,8 +12,19 @@
                     <h4 class="text-center">Category Summery</h4>
                     <canvas id="myChart"></canvas>
                 </div>
-                <div class="col-4 fw-bold text-center">Category Progress Bar</div>
-                <div class="col-4 fw-bold text-center">Category Summary Chart</div>
+                <div class="col-4 fw-bold">
+                  <h4 class="text-center">Category Progress Bar</h4>
+                  {%for cs in category_summary%}
+                  <label for="">{{cs.category}}</label>
+                  <div class="progress mb-3" role="progressbar" aria-label="Info example " aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="height: 25px">
+                    <div class="progress-bar bg-info text-dark" style="width:{{cs.total|percentage:expense_total.total}}%">{{cs.total|percentage:expense_total.total}}%</div>
+                  </div>
+                  {%endfor%}
+                </div>
+                <div class="col-4 fw-bold text-center">
+                  <h4 class="text-center">priority Summery</h4>
+                  <canvas id="prioritychart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -32,6 +44,30 @@
       datasets: [{
         label: '# of Votes',
         data: [{%for cs in category_summary%}"{{cs.total}}",{%endfor%}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<!-- priority chart -->
+<script>
+  const ctx1 = document.getElementById('prioritychart');
+
+  new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+      labels: [{%for ps in priority_summary%}"{{ps.priority}}",{%endfor%}],
+      datasets: [{
+        label: '# of Votes',
+        data: [{%for ps in priority_summary%}"{{ps.total}}",{%endfor%}],
         borderWidth: 1
       }]
     },

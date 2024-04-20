@@ -42,6 +42,8 @@ urlpatterns = [
 
     path('income/<int:pk>/remove/',views.IncomeDeleteView.as_view(),name='income-delete'),
 
-    path('income/summary/',views.IncomeSummaryView.as_view(),name='income-summary')
+    path('income/summary/',views.IncomeSummaryView.as_view(),name='income-summary'),
+
+    path('register/',views.SignUpView.as_view(),name='signup')
 
 ]
