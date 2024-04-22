@@ -56,4 +56,9 @@ class RegistrationForm(forms.ModelForm):
         
         fields=["username","email","password"]
 
+class LoginForm(forms.Form):
+
+    username=forms.CharField()
+
+    password=forms.CharField()
        

@@ -44,6 +44,10 @@ urlpatterns = [
 
     path('income/summary/',views.IncomeSummaryView.as_view(),name='income-summary'),
 
-    path('register/',views.SignUpView.as_view(),name='signup')
+    path('register/',views.SignUpView.as_view(),name='signup'),
+
+    path('signin/',views.SignInView.as_view(),name='signin'),
+
+    path('signout/',views.SignOutView.as_view(),name='signout')
 
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 from django.views.generic import View
 
-from budget.forms import ExpenseForm, IncomeForm,RegistrationForm
+from budget.forms import ExpenseForm, IncomeForm,RegistrationForm,LoginForm
 
 from budget.models import Expense,Income
 
@@ -13,6 +13,8 @@ from django.utils import timezone
 from django.db.models import Sum
 
 from django.contrib.auth.models import User
+
+from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
 
@@ -279,6 +281,50 @@ class SignUpView(View):
             print("user creation failed")
 
             return render(request,"register.html",{"form":form_instance})
+
+class SignInView(View):
+
+    def get(self,request,*args, **kwargs):
+
+        form_instance=LoginForm()
+
+        return render(request,"login.html",{"form":form_instance})
+
+    def post(self,request,*args, **kwargs):
+
+        form_instance=LoginForm(request.POST)
+
+        if form_instance.is_valid():
+
+            data=form_instance.cleaned_data
+
+            uname=data.get("username")
+
+            pwd=data.get("password")
+
+            user_object=authenticate(request,username=uname,password=pwd)
+
+            if user_object:
+
+                login(request,user_object)
+
+                return redirect('expense-add')
+
+        return render(request,"login.html",{"form":form_instance})
+
+class SignOutView(View):
+
+    def get(self,request,*args, **kwargs):
+
+        logout(request)
+
+        return redirect('signin')
+
+
+
+
+
+   
 
 
 
