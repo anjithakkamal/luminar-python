@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,16 +10,27 @@
 
 </head>
 <body>
-    <div class="container border mt-5 shadow rounded bg-info-subtle">
-        <form action="" method="post">
-            <h1 class="text-center">Registration Form</h1>
-            {%csrf_token%}
-            {{form.as_p}}
-
-            <button type="submit">Register</button>
-        </form>
-        
-
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="card mb-3 mt-5 shadow" style="max-width: 70%;">
+            <div class="row g-0">
+              <div class="col-md-6">
+                <img src="{%static 'images/rr.png'%}" class="img-fluid rounded-start mx-auto d-block mt-5" alt="...">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold text-center">SignUp</h5>
+                  <form action="" method="post">
+                      {%csrf_token%}
+                      {{form.as_p}}
+                      <button type="submit" class="btn btn-outline-dark form-control">SignUp</button>
+                  </form>
+                  <div class="my-4">
+                      Already User?<a href="{%url 'signin'%}"> SignIn</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 </body>
 </html>
