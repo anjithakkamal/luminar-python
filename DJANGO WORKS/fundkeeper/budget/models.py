@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 
 class Expense(models.Model):
 
@@ -22,7 +24,7 @@ class Expense(models.Model):
 
     category=models.CharField(max_length=200,choices=expense_categories,default="Miscellaneous")
 
-    owner=models.CharField(max_length=200)
+    user_object=models.ForeignKey(User,on_delete=models.CASCADE)
 
     created_date=models.DateTimeField(auto_now_add=True)
 
@@ -61,7 +63,7 @@ class Income(models.Model):
 
     category=models.CharField(max_length=200,choices=income_categories,default="Salary")
 
-    owner=models.CharField(max_length=200)
+    user_object=models.ForeignKey(User,on_delete=models.CASCADE)
 
     created_date=models.DateTimeField(auto_now_add=True)
 

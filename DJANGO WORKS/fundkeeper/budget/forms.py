@@ -11,7 +11,7 @@ class ExpenseForm(forms.ModelForm):
 
         model=Expense
 
-        exclude=("id","created_date")
+        exclude=("id","created_date","user_object")
 
         widgets={
 
@@ -21,7 +21,7 @@ class ExpenseForm(forms.ModelForm):
 
             "category":forms.Select(attrs={"class":"form-control form-select"}),
 
-            "owner":forms.TextInput(attrs={"class":"form-control"}),
+            # "owner":forms.TextInput(attrs={"class":"form-control"}),
 
             "priority":forms.Select(attrs={"class":"form-control form-select"})
 
@@ -34,7 +34,7 @@ class IncomeForm(forms.ModelForm):
 
         model=Income
 
-        exclude=("id","created_date")
+        exclude=("id","created_date","user_object")
 
         widgets={
 
@@ -44,7 +44,7 @@ class IncomeForm(forms.ModelForm):
 
             "category":forms.Select(attrs={"class":"form-control form-select"}),
 
-            "owner":forms.TextInput(attrs={"class":"form-control"})
+            # "owner":forms.TextInput(attrs={"class":"form-control"})
 
         }
 

@@ -24,7 +24,7 @@ class ExpenseCreateView(View):
 
         form_instance=ExpenseForm()
 
-        qs=Expense.objects.all()
+        qs=Expense.objects.filter(user_object=request.user)
 
         return render(request,"expense_add.html",{"form":form_instance,"data":qs})
 
@@ -33,6 +33,8 @@ class ExpenseCreateView(View):
         form_instance=ExpenseForm(request.POST)
 
         if form_instance.is_valid():
+
+            form_instance.instance.user_object=request.user
 
             form_instance.save()
 
@@ -110,7 +112,7 @@ class ExpenseSummaryView(View):
 
         current_year=timezone.now().year
 
-        expense_list=Expense.objects.filter(created_date__month=current_month,created_date__year=current_year)
+        expense_list=Expense.objects.filter(created_date__month=current_month,created_date__year=current_year,user_object=request.user)
 
         expense_total=expense_list.values("amount").aggregate(total=Sum("amount"))
 
@@ -147,7 +149,7 @@ class IncomeCreatedView(View):
 
         form_instance=IncomeForm()
 
-        qs=Income.objects.all()
+        qs=Income.objects.filter(user_object=request.user)
 
         return render(request,"income_add.html",{"form":form_instance,"data":qs})
 
@@ -156,6 +158,8 @@ class IncomeCreatedView(View):
         form_instance=IncomeForm(request.POST)
 
         if form_instance.is_valid():
+
+            form_instance.instance.user_object=request.user
 
             form_instance.save()
 
@@ -231,7 +235,7 @@ class IncomeSummaryView(View):
 
         current_year=timezone.now().year
 
-        income_list=Income.objects.filter(created_date__month=current_month,created_date__year=current_year)
+        income_list=Income.objects.filter(created_date__month=current_month,created_date__year=current_year,user_object=request.user)
 
         income_total=income_list.values("amount").aggregate(total=Sum("amount"))
 
@@ -274,7 +278,7 @@ class SignUpView(View):
 
             print("user object created")
 
-            return redirect('signup')
+            return redirect('signin')
 
         else:
 
@@ -309,6 +313,8 @@ class SignInView(View):
                 login(request,user_object)
 
                 return redirect('expense-add')
+
+        messages.error(request,"invalid credential")
 
         return render(request,"login.html",{"form":form_instance})
 
