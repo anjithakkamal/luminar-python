@@ -10,13 +10,13 @@ class TaskForm(forms.ModelForm):
 
         model=Task
 
-        exclude=("id","created_date")
+        exclude=("id","created_date","user_object")
 
         widgets={
 
             "title":forms.TextInput(attrs={"class":"form-control"}),
 
-            "owner":forms.TextInput(attrs={"class":"form-control"}),   
+            # "owner":forms.TextInput(attrs={"class":"form-control"}),   
 
         }
 

@@ -25,7 +25,7 @@ class TaskCreateView(View):
 
         form_instance=TaskForm()
 
-        qs=Task.objects.all()
+        qs=Task.objects.filter(user_object=request.user)
 
         return render(request,"task_create.html",{"form":form_instance,"data":qs})
 
@@ -34,6 +34,8 @@ class TaskCreateView(View):
         form_instance=TaskForm(request.POST)
 
         if form_instance.is_valid():
+
+            form_instance.instance.user_object=request.user
 
             form_instance.save()
 
@@ -111,7 +113,7 @@ class TaskSummaryView(View):
 
         current_year=timezone.now().year
 
-        task_list=Task.objects.filter(created_date__month=current_month,created_date__year=current_year)
+        task_list=Task.objects.filter(created_date__month=current_month,created_date__year=current_year,user_object=request.user)
 
         task_summary=task_list.values("status").annotate(count=Count("status"))
 
@@ -145,7 +147,7 @@ class SignUpView(View):
 
             print("user create object successfully!!!")
 
-            return redirect('register')
+            return redirect('signin')
 
         else:
 
@@ -180,6 +182,8 @@ class SignInView(View):
                 login(request,user_object)
 
                 return redirect('task-add')
+        
+        messages.error(request,"invalid credential")
 
         return render(request,"login.html",{"form":form_instance})
 
