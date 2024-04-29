@@ -1,4 +1,3 @@
-from itertools import count
 from django.shortcuts import render,redirect
 
 from django.views.generic import View
@@ -16,6 +15,8 @@ from django.db.models import Count
 from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
+
+from todo.decorators import signin_required
 
 # Create your views here.
 
