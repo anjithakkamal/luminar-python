@@ -16,11 +16,19 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate,login,logout
 
+from budget.decorators import signin_required
+
 # Create your views here.
 
 class ExpenseCreateView(View):
 
     def get(self,request,*args, **kwargs):
+
+        if not request.user.is_authenticated:
+
+            messages.error(request,"invalid session please login")
+
+            return redirect("signin")
 
         form_instance=ExpenseForm()
 
