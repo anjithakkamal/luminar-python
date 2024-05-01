@@ -18,17 +18,19 @@ from django.contrib.auth import authenticate,login,logout
 
 from budget.decorators import signin_required
 
-# Create your views here.
+from django.utils.decorators import method_decorator
 
+# Create your views here.
+@method_decorator(signin_required,name="dispatch")
 class ExpenseCreateView(View):
 
     def get(self,request,*args, **kwargs):
 
-        if not request.user.is_authenticated:
+        # if not request.user.is_authenticated:
 
-            messages.error(request,"invalid session please login")
+        #     messages.error(request,"invalid session please login")
 
-            return redirect("signin")
+        #     return redirect("signin")
 
         form_instance=ExpenseForm()
 
@@ -57,7 +59,7 @@ class ExpenseCreateView(View):
             messages.error(request,"error in creation")
 
             return render(request,"expense_add.html",{"form":form_instance})
-
+@method_decorator(signin_required,name="dispatch")
 class ExpenseUpdateView(View):
 
     def get(self,request,*args, **kwargs):
@@ -90,6 +92,7 @@ class ExpenseUpdateView(View):
 
         return render(request,"expense_edit.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class ExpenseDetailView(View):
 
     def get(self,request,*args, **kwargs):
@@ -100,6 +103,7 @@ class ExpenseDetailView(View):
 
         return render(request,"expense_detail.html",{"data":qs})
 
+@method_decorator(signin_required,name="dispatch")
 class ExpenseDeleteView(View):
 
     def get(self,request,*args, **kwargs):
@@ -112,6 +116,7 @@ class ExpenseDeleteView(View):
 
         return redirect('expense-add')
 
+@method_decorator(signin_required,name="dispatch")
 class ExpenseSummaryView(View):
 
     def get(self,request,*args, **kwargs):
@@ -150,7 +155,7 @@ class ExpenseSummaryView(View):
 
 # _________________________________________income view_________________________________________________
 
-
+@method_decorator(signin_required,name="dispatch")
 class IncomeCreatedView(View):
 
     def get(self,request,*args, **kwargs):
@@ -181,6 +186,7 @@ class IncomeCreatedView(View):
 
             return render(request,"income_add.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class IncomeUpdateView(View):
 
     def get(self,request,*args, **kwargs):
@@ -213,6 +219,7 @@ class IncomeUpdateView(View):
 
         return render(request,"income_edit.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class IncomeDetailView(View):
 
     def get(self,request,*args, **kwargs):
@@ -223,6 +230,7 @@ class IncomeDetailView(View):
 
         return render(request,"income_detail.html",{"data":qs})
 
+@method_decorator(signin_required,name="dispatch")
 class IncomeDeleteView(View):
 
     def get(self,request,*args, **kwargs):
@@ -235,6 +243,7 @@ class IncomeDeleteView(View):
 
         return redirect('income-add')
 
+@method_decorator(signin_required,name="dispatch")
 class IncomeSummaryView(View):
 
     def get(self,request,*args, **kwargs):
@@ -320,12 +329,13 @@ class SignInView(View):
 
                 login(request,user_object)
 
-                return redirect('expense-add')
+                return redirect('dashboard')
 
         messages.error(request,"invalid credential")
 
         return render(request,"login.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class SignOutView(View):
 
     def get(self,request,*args, **kwargs):
@@ -333,6 +343,52 @@ class SignOutView(View):
         logout(request)
 
         return redirect('signin')
+
+class DashBoardView(View):
+
+    def get(self,request,*args, **kwargs):
+
+        current_month=timezone.now().month
+
+        current_year=timezone.now().year
+
+        
+        expense_list=Expense.objects.filter(user_object=request.user,created_date__month=current_month,created_date__year=current_year)
+
+        print("expense",expense_list)
+
+        income_list=Income.objects.filter(user_object=request.user,created_date__month=current_month,created_date__year=current_year)
+
+        print("income",income_list)
+
+        expense_total=expense_list.values("amount").aggregate(total=Sum("amount"))
+
+        print("expense total",expense_total)
+
+        income_total=income_list.values("amount").aggregate(total=Sum("amount"))
+
+        print("income total",income_total)
+
+        # category_summary=expense_list.values("category").annotate(total=Sum("amount"))
+
+        # print("category summary",category_summary)
+
+        # priority_summary=expense_list.values("priority").annotate(total=Sum("amount"))
+
+        # print("priority_summary",priority_summary)
+
+        # data={
+
+        #     "expense_total":expense_total,
+
+        #     "category_summary":category_summary,
+
+        #     "priority_summary":priority_summary
+        # }
+
+        return render(request,"dashboard.html",{"expense":expense_total,"income":income_total})
+
+
 
 
 

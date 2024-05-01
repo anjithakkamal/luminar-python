@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{%block main_block%}
+<div class="container">
+
+    <h1 class="text-center">DashBoard</h1>
+    <div class="row">
+        <div class="col-4">
+            
+        </div>
+        <div class="col-4">
+            <div class="my-3 d-flex justify-content-around">
+                <div class="fw-bold text-center">Total Expense:{{expense.total}}</div>
+                <div class="fw-bold text-center">
+                    Total Income:{{income.total}}
+                </div>
+            </div>
+            <canvas id="mychart"></canvas>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
+    <!-- {{expense}}
+    {{income}} -->
+</div>
+{%endblock%}
+{%block script_block%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('mychart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["income", "expense"],
+            datasets: [{
+                label: '# of Votes',
+                data: [{{ income.total }}, {{ expense.total }}],
+        borderWidth: 1
+    }]
+    },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+  });
+</script>
+
+{%endblock%}
