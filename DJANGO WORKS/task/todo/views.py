@@ -18,8 +18,11 @@ from django.contrib.auth import authenticate,login,logout
 
 from todo.decorators import signin_required
 
+from django.utils.decorators import method_decorator
+
 # Create your views here.
 
+@method_decorator(signin_required,name="dispatch")
 class TaskCreateView(View):
 
     def get(self,request,*args, **kwargs):
@@ -51,7 +54,7 @@ class TaskCreateView(View):
             messages.error(request,"task adding error")
 
             return render(request,"task_create.html",{"form":form_instance})
-
+@method_decorator(signin_required,name="dispatch")
 class TaskUpdateView(View):
 
     def get(self,request,*args, **kwargs):
@@ -84,6 +87,7 @@ class TaskUpdateView(View):
 
         return render(request,"task_edit.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class TaskDetailView(View):
 
     def get(self,request,*args, **kwargs):
@@ -94,6 +98,7 @@ class TaskDetailView(View):
 
         return render(request,"task_detail.html",{"data":qs})
 
+@method_decorator(signin_required,name="dispatch")
 class TaskDeleteView(View):
 
     def get(self,request,*args, **kwargs):
@@ -106,6 +111,7 @@ class TaskDeleteView(View):
 
         return redirect('task-add')
 
+@method_decorator(signin_required,name="dispatch")
 class TaskSummaryView(View):
 
     def get(self,request,*args, **kwargs):
@@ -188,6 +194,7 @@ class SignInView(View):
 
         return render(request,"login.html",{"form":form_instance})
 
+@method_decorator(signin_required,name="dispatch")
 class SignOutView(View):
 
     def get(self,request,*args, **kwargs):
