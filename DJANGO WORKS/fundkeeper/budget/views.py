@@ -36,7 +36,7 @@ class ExpenseCreateView(View):
 
         form_instance=ExpenseForm()
 
-        qs=Expense.objects.filter(user_object=request.user)
+        qs=Expense.objects.filter(user_object=request.user).order_by("-created_date")
 
         return render(request,"expense_add.html",{"form":form_instance,"data":qs})
 
@@ -164,7 +164,7 @@ class IncomeCreatedView(View):
 
         form_instance=IncomeForm()
 
-        qs=Income.objects.filter(user_object=request.user)
+        qs=Income.objects.filter(user_object=request.user).order_by("-created_date")
 
         return render(request,"income_add.html",{"form":form_instance,"data":qs})
 

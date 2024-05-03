@@ -1,6 +1,7 @@
 {%extends 'base.html'%}
 {%block main_block%}
 <div class="container border shadow my-5 p-4 w-50 mx-auto rounded bg-info-subtle text-info-emphasis">
+    <h4>welcome user {{request.user}}</h4>
     <form action="" method="post">
         <h3 class="fw-bold">Expense Edit</h3>
         {%csrf_token%}

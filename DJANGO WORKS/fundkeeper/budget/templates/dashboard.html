@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 {%block main_block%}
 <div class="container">
-
+    <h4>welcome user {{request.user}}</h4>
     <h1 class="text-center ">DashBoard</h1>
     <div class="row ">
         <div class="col-4">
@@ -19,10 +19,11 @@
                     Total Income:{{income.total}}
                 </div>
             </div>
-            <canvas id="mychart"></canvas>
+            <canvas id="mychart" ></canvas>
         </div>
         <div class="col-4">
-            <canvas id="summarychart"></canvas>
+            <h4 class="text-center">monthly summary</h4>
+            <canvas id="summarychart" height="300px" class=""></canvas>
 <!-- 
             {{monthly_incomes}}
             {{monthly_expenses}} -->

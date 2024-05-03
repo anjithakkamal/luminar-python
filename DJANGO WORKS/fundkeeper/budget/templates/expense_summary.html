@@ -2,6 +2,7 @@
 {% block main_block %}
 {% load custom_filters%}
 <div class="container">
+  <h4>welcome user {{request.user}}</h4>
     <div class="card">
         <div class="card-header">
             <h3 class="fw-bold text-center">Total Expense:{{expense_total.total}}</h3>
