@@ -29,7 +29,7 @@ class TaskCreateView(View):
 
         form_instance=TaskForm()
 
-        qs=Task.objects.filter(user_object=request.user)
+        qs=Task.objects.filter(user_object=request.user).order_by("-created_date")
 
         return render(request,"task_create.html",{"form":form_instance,"data":qs})
 
