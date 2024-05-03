@@ -50,6 +50,6 @@ urlpatterns = [
 
     path('signout/',views.SignOutView.as_view(),name='signout'),
 
-    path('dashboard/',views.DashBoardView.as_view(),name='dashboard')
+    path('dashboard/',views.DashBoardView.as_view(),name='dashboard'),
 
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 
 from django.views.generic import View
 
-from budget.forms import ExpenseForm, IncomeForm,RegistrationForm,LoginForm
+from budget.forms import ExpenseForm, IncomeForm,RegistrationForm,LoginForm,SummaryForm
 
 from budget.models import Expense,Income
 
@@ -19,6 +19,8 @@ from django.contrib.auth import authenticate,login,logout
 from budget.decorators import signin_required
 
 from django.utils.decorators import method_decorator
+
+import datetime
 
 # Create your views here.
 @method_decorator(signin_required,name="dispatch")
@@ -344,9 +346,12 @@ class SignOutView(View):
 
         return redirect('signin')
 
+@method_decorator(signin_required,name="dispatch")
 class DashBoardView(View):
 
     def get(self,request,*args, **kwargs):
+
+        form_instace=SummaryForm()
 
         current_month=timezone.now().month
 
@@ -369,24 +374,77 @@ class DashBoardView(View):
 
         print("income total",income_total)
 
-        # category_summary=expense_list.values("category").annotate(total=Sum("amount"))
+        monthly_expenses={}
 
-        # print("category summary",category_summary)
+        monthly_incomes={}
 
-        # priority_summary=expense_list.values("priority").annotate(total=Sum("amount"))
+        for month in range(1,13):
 
-        # print("priority_summary",priority_summary)
+            start_date=datetime.date(current_year,month,1)
 
-        # data={
+            if month==12:
 
-        #     "expense_total":expense_total,
+                end_date=datetime.date(current_year+1,1,1)
+            else:
 
-        #     "category_summary":category_summary,
 
-        #     "priority_summary":priority_summary
-        # }
+                end_date=datetime.date(current_year,month+1,1)
 
-        return render(request,"dashboard.html",{"expense":expense_total,"income":income_total})
+            monthly_expense_total=Expense.objects.filter(user_object=request.user,created_date__gte=start_date,created_date__lte=end_date).aggregate(total=Sum('amount'))['total']
+
+            monthly_expenses[start_date.strftime('%B')]=monthly_expense_total if monthly_expense_total else 0
+
+            monthly_income_total=Income.objects.filter(user_object=request.user,created_date__gte=start_date,created_date__lte=end_date).aggregate(total=Sum('amount'))['total']
+
+            monthly_incomes[start_date.strftime('%B')]=monthly_income_total if monthly_income_total else 0
+        
+        print("monthly expe",monthly_expenses)
+
+        print("monthly income",monthly_incomes)
+
+        
+
+        return render(request,"dashboard.html",
+        {
+            "expense":expense_total,
+            "income":income_total,
+            "form":form_instace,
+            "monthly_incomes":monthly_incomes,
+            "monthly_expenses":monthly_expenses
+            }
+            )
+
+    def post(self,request,*args, **kwargs):
+
+        form_instance=SummaryForm(request.POST)
+
+        if form_instance.is_valid():
+
+            data=form_instance.cleaned_data
+
+            start_date=data.get("start_date")
+
+            end_date=data.get("end_date")
+
+            expense_list=Expense.objects.filter(user_object=request.user,created_date__gte=start_date,created_date__lte=end_date)
+
+            print("expense",expense_list)
+
+            income_list=Income.objects.filter(user_object=request.user,created_date__gte=start_date,created_date__lte=end_date)
+
+            print("income",income_list)
+
+            expense_total=expense_list.values("amount").aggregate(total=Sum("amount"))
+
+            print("expense total",expense_total)
+
+            income_total=income_list.values("amount").aggregate(total=Sum("amount"))
+
+            print("income total",income_total)
+    
+        return render(request,"dashboard.html",{"expense":expense_total,"income":income_total,"form":form_instance})
+
+
 
 
 

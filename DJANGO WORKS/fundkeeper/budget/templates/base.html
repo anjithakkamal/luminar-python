@@ -33,7 +33,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{%url 'expense-add'%}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{%url 'dashboard'%}">Home</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="{%url 'income-add'%}">Income</a>
@@ -88,9 +88,14 @@
   {%block main_block%}
   {%endblock%}
   <!-- footer -->
-  <footer class="bg-dark text-white p-4 fixed-bottom">
+  <!-- <footer class="bg-dark text-white p-4 fixed-bottom">
     <h3 class="text-center fw-bold">FundKeeper@2024</h3>
-  </footer>
+  </footer> -->
+  <nav class="navbar fixed-bottom bg-dark ">
+    <div class="container-fluid text-center d-flex justify-content-center">
+      <h4 class="text-center text-white">FundKeeper@2024</h4>
+    </div>
+  </nav>
 </body>
 {%block script_block%}
 {%endblock%}

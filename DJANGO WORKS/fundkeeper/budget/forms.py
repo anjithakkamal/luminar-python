@@ -71,3 +71,8 @@ class LoginForm(forms.Form):
 
     password=forms.CharField(widget=forms.PasswordInput(attrs={"class":"form-control"}))
        
+class SummaryForm(forms.Form):
+
+    start_date=forms.DateTimeField(widget=forms.DateInput(attrs={"class":"form-control mb-4","type":"date"}))
+
+    end_date=forms.DateTimeField(widget=forms.DateInput(attrs={"class":"form-control mb-4","type":"date"}))
