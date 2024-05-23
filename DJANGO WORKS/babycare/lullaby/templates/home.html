@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block main_block%}
+<section>
+    <div class="px-2 lg:flex lg:flex-row lg:items-center">
+      <div class="w-full lg:w-1/2">
+        <div class="my-10 lg:my-0 lg:px-10">
+          <h2 class="text-3xl font-bold leading-tight text-pink-400 sm:text-4xl lg:text-5xl">
+            Welcome babys
+          </h2>
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-gray-600">
+            Whether you envision selling a hot trending baby product or something parents always need, like diapers, here are product ideas to get you started:
+Organic baby clothes. ...
+Baby booster seats. ...
+Baby bottles. ...
+Disposable diapers. ...
+Hypoallergenic baby diaper wipes. ...
+Diaper backpack. ...
+
+          </p>
+          <form action="#" method="POST" class="mt-8 max-w-xl">
+            <div class="flex flex-col sm:flex-row sm:items-center">
+              <div class="flex w-full max-w-sm items-center space-x-2">
+                <!-- <input
+                  class="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 "
+                  type="email"
+                  placeholder="Email"
+                /> -->
+                <a
+                  href="{%url 'index'%}"
+                  class="rounded-md bg-violet-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                >
+                 SHOPNOW
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="w-full lg:w-1/2">
+        <img
+          src="{%static 'images/bg.jpg'%}"
+          alt="ManWith Laptop"
+          class="h-full w-full rounded-md object-cover"
+        />
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}
