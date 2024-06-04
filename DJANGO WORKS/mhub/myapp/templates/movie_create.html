@@ -6,6 +6,7 @@
 <div class="container border shadow my-5 p-4  w-50 mx-auto rounded">
     <h2 class="text-center fw-bold">Add Movies</h2>
     <form action="" method="post">
+        {{form.errors}}
         {%csrf_token%}
         
         <div class="row mb-4">

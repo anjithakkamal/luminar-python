@@ -1,5 +1,7 @@
 from django import forms
 
+from myapp.models import Movie
+
 class MovieForm(forms.Form):
 
     title=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control border border-info"}))
@@ -15,3 +17,33 @@ class MovieForm(forms.Form):
     genre=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control border border-info"}))
 
     producer=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control border border-info"}))
+
+
+class MovieModelForm(forms.ModelForm):
+
+    class Meta:
+
+        model=Movie
+
+        exclude=("id",)
+
+        # fields=["title","run_time".........]
+
+        # fields="__all__"
+
+        widgets={
+
+            "title":forms.TextInput(attrs={"class":"form-control"}),
+
+            "year":forms.TextInput(attrs={"class":"form-control"}),
+
+            "language":forms.TextInput(attrs={"class":"form-control"}),
+
+            "run_time":forms.NumberInput(attrs={"class":"form-control"}),
+
+            "director":forms.TextInput(attrs={"class":"form-control"}),
+
+            "genre":forms.TextInput(attrs={"class":"form-control"}),
+
+            "producer":forms.TextInput(attrs={"class":"form-control"})
+        }
