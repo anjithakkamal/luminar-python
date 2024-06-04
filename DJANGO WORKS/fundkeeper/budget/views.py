@@ -293,7 +293,7 @@ class SignUpView(View):
 
             data=form_instance.cleaned_data
 
-            User.objects.create_user(**data)
+            User.objects.create_user(**data)#password encrpyt (craete user)
 
             print("user object created")
 

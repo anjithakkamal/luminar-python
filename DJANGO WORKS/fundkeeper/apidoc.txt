@@ -1,0 +1,126 @@
+authentication
+
+schema:User
+
+attributes:[username,email,password]
+
+1) api for registering user account
+
+    url: http://127.0.0.1:8000/api/register/
+
+    method:POST
+
+    body:{
+        username
+        email
+        password
+    }
+=========================================================================================
+schema:expense
+
+attributes:[id,title,amount,category,user_object,priority,created_date]
+
+1) api for listing expenses
+
+    url:http://127.0.0.1:8000/api/expenses
+
+    method:get
+
+    body:nill
+
+    authorization:{username,password}  basic authentication,token,jwt
+
+2) api fro adding anew expenses
+
+    url:http://127.0.0.1:8000/api/expenses
+
+    method:POST
+
+    body:{title,amount,category,priority}
+
+    authorization:BasicAuthentication
+
+3) api for fetching expensedetail
+
+    url:http://127.0.0.1:8000/api/expenses/{id}
+
+    method:get
+
+    body:nill
+
+    authorization:BasicAuthentication
+
+4) api for updating expensedetail
+
+    url:http://127.0.0.1:8000/api/expenses/{id}
+
+    method:PUT
+
+     body:{title,amount,category,priority}
+
+    authorization:BasicAuthentication
+
+5) api for deleting expensedetail
+
+    url:http://127.0.0.1:8000/api/expenses/{id}
+
+    method:delete
+
+    body:nill
+
+    authorization:BasicAuthentication
+
+========================================================================================================
+schema:Income
+
+attributes:[id,title,amount,category,created_date]
+
+1) api forr listing Income
+
+    url:http://127.0.0.1:8000/api/income/
+
+    method:get
+
+    body:nill
+
+    authentication:{username,password} BasicAuthentication
+
+2) api for adding income
+
+    url:http://127.0.0.1:8000/api/income/
+
+    method:POST
+
+    body:{title,amount,category}
+
+    authorization:{username,password} BasicAuthentication
+
+ 3) api for updating income
+
+    url:http://127.0.0.1:8000/api/income/{id}/
+    
+    method:PUT
+
+    body:{title,amount,category}
+
+    authorization:{username,password} BasicAuthentication
+
+4) api for detail income
+
+    url:http://127.0.0.1:8000/api/income/{id}/
+    
+    method:get
+
+    body:nill
+
+    authorization:{username,password} BasicAuthentication
+
+5) api for detail income
+
+    url:http://127.0.0.1:8000/api/income/{id}/
+    
+    method:delete
+
+    body:nill
+
+    authorization:{username,password} BasicAuthentication
