@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from rest_framework.generics import CreateAPIView,RetrieveUpdateDestroyAPIView
+
 from rest_framework.viewsets import ModelViewSet
 
 from rest_framework.response import Response
@@ -10,7 +12,7 @@ from rest_framework.decorators import action
 
 from api.serializers import CustomerSerializer, WorkSerializer
 
-from api.models import Customer
+from api.models import Customer, Work
 
 
 
@@ -30,24 +32,49 @@ class CustomerViewSetView(ModelViewSet):
         
         serializer.save(technician=self.request.user)
 
-    @action(methods=["post"],detail=True)
-    def add_work(self,request,*args, **kwargs):
+    # @action(methods=["post"],detail=True)
+    # def add_work(self,request,*args, **kwargs):
 
-        id=kwargs.get("pk")
+    #     id=kwargs.get("pk")
+
+    #     customer_instance=Customer.objects.get(id=id)
+
+    #     serializer_instance=WorkSerializer(data=request.data)
+
+    #     if serializer_instance.is_valid():
+
+    #         serializer_instance.save(customer=customer_instance)
+
+    #         return Response(data=serializer_instance.data)
+        
+    #     else:
+
+    #         return Response(data=serializer_instance.errors)
+
+class WorkCreateView(CreateAPIView):
+
+    serializer_class=WorkSerializer
+
+    authentication_classes=[authentication.TokenAuthentication]
+
+    permission_classes=[permissions.IsAdminUser]
+
+    def  perform_create(self, serializer):
+        
+        id=self.kwargs.get("pk")
 
         customer_instance=Customer.objects.get(id=id)
 
-        serializer_instance=WorkSerializer(data=request.data)
+        serializer.save(customer=customer_instance)
 
-        if serializer_instance.is_valid():
+class workDetailView(RetrieveUpdateDestroyAPIView):
 
-            serializer_instance.save(customer=customer_instance)
+    serializer_class=WorkSerializer
 
-            return Response(data=serializer_instance.data)
-        
-        else:
+    queryset=Work.objects.all()
 
-            return Response(data=serializer_instance.errors)
+    authentication_classes=[authentication.TokenAuthentication]
 
+    permission_classes=[permissions.IsAdminUser]
 
 
