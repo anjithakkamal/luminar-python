@@ -1,0 +1,71 @@
+
+Schema : Employee
+
+Attributes :id, name,department,place,salary,profile
+
+Employee Endpoints
+===============
+
+    1) API for listing all Employee
+
+        url:http://127.0.0.1:8000/api/employee/
+
+        method:GET
+
+        body:nill
+
+        Autorization:nill
+
+     2) API for adding a new  movie
+
+        url:http://127.0.0.1:8000/api/employee/
+
+        method:POST
+
+        body:{ 
+                name:employee_name,
+                department:department,
+                place:place,
+                salary:employee_salary,
+                profile:employee_profile
+            }
+
+        Autorization:nill
+
+     3) API for fetching employee details
+
+        url:http://127.0.0.1:8000/api/employee/{id}/
+
+        method:GET
+
+        body:nill
+
+        Autorization:nill
+
+     4) API for editing a employee
+
+        url:http://127.0.0.1:8000/api/employee/{id}/
+
+        method:PUT
+
+        body:{
+                 name:employee_name,
+                department:department,
+                place:place,
+                salary:employee_salary,
+                profile:employee_profile
+            }
+
+        Autorization:nill
+
+
+     5) API for delete employee details
+
+        url:http://127.0.0.1:8000/api/employee/{id}/
+
+        method:DELETE
+
+        body:nill
+
+        Autorization:nill
+
