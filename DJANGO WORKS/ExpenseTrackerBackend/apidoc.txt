@@ -1,0 +1,66 @@
+Schema : Expense
+
+Attributes : [id, title, amount, category]
+
+1) api for listing all Expenses
+
+    url : http://127.0.0.1:8000/api/expenses/
+    
+    method : get
+
+    body : nill
+
+    authorization : nill
+
+2) api for adding new Expenses
+
+    url : http://127.0.0.1:8000/api/expenses/
+
+    method : post
+
+    body : {
+        title: "expense title",
+
+        amount : "amount",
+
+        category : "category"
+    }
+
+    authorization : nill
+
+3) api for fetching a Expense detail
+
+    url : http://127.0.0.1:8000/api/expenses/{id}/
+
+    method : get
+
+    body : nill
+
+    authorization : nill
+
+4) api for updating expenses detail
+
+    url : http://127.0.0.1:8000/api/expenses/{id}/
+
+    method : put
+
+    body : {
+         title: "expense title",
+
+        amount : "amount",
+
+        category : "category"
+    }
+
+    authorization : nill
+
+5) api for deleting Expense
+
+    url : http://127.0.0.1:8000/api/expense/{id}/
+
+    method : delete
+
+    body : nill
+
+    authorization : nill
+
