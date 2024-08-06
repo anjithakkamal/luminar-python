@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOW_ALL_ORIGINS=True
+
+from datetime import timedelta
+
+SIMPLE_JWT={
+    'ACCESS_TOKEN_LIFETIME':timedelta(days=1),
+    
+    'REFRESH_TOKEN_LIFETIME':timedelta(days=2)
+}

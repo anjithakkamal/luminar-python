@@ -8,8 +8,9 @@ from api.serializers import ExpenseSerializer
 
 from rest_framework import permissions,authentication
 
-
 from rest_framework.viewsets import ModelViewSet
+
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 # Create your views here.
@@ -20,9 +21,9 @@ class ExpenseViewSetView(ModelViewSet):
 
     queryset=Expense.objects.all()
 
-    authentication_classes=[authentication.TokenAuthentication]
+    authentication_classes=[JWTAuthentication]
 
-    permission_classes=[permissions.IsAdminUser]
+    permission_classes=[permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         
